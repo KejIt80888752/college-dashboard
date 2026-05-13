@@ -1,0 +1,78 @@
+@import "tailwindcss";
+
+@keyframes spin {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(8px); }
+  to { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes pulse-soft {
+  0%, 100% { opacity: 1; }
+  50% { opacity: 0.6; }
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+body {
+  font-family: 'Inter', system-ui, -apple-system, sans-serif;
+  background: #F5F5FF;
+  color: #1A1A2E;
+  -webkit-font-smoothing: antialiased;
+}
+
+#root {
+  width: 100%;
+  min-height: 100vh;
+}
+
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track { background: #f1f1f1; }
+::-webkit-scrollbar-thumb { background: #3D3BF3; border-radius: 3px; }
+::-webkit-scrollbar-thumb:hover { background: #2B29C9; }
+
+.sidebar-link {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  padding: 10px 16px;
+  border-radius: 10px;
+  color: #6B7280;
+  font-size: 14px;
+  font-weight: 500;
+  transition: all 0.2s;
+  cursor: pointer;
+  text-decoration: none;
+}
+.sidebar-link:hover { background: #EEF0FF; color: #3D3BF3; }
+.sidebar-link.active { background: #3D3BF3; color: #fff; }
+.sidebar-link.active svg { color: #fff; }
+
+/* Override Chrome autofill background */
+input:-webkit-autofill,
+input:-webkit-autofill:hover,
+input:-webkit-autofill:focus,
+input:-webkit-autofill:active {
+  -webkit-box-shadow: 0 0 0 30px #F9FAFB inset !important;
+  -webkit-text-fill-color: #1A1A2E !important;
+  caret-color: #1A1A2E !important;
+  transition: background-color 5000s ease-in-out 0s;
+}
+
+/* Ensure input field styling is consistent */
+input, textarea, select {
+  font-family: inherit;
+}
+input:focus, textarea:focus, select:focus {
+  outline: none;
+}
