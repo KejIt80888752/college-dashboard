@@ -26,7 +26,8 @@ jobs:
       - name: Build
         run: npm run build
         env:
-          VITE_API_URL: http://13.53.193.80:8080
+          VITE_API_URL: https://api.theraise.in
+          VITE_USE_MOCK: false
 
       - name: Deploy to GitHub Pages
         uses: peaceiris/actions-gh-pages@v4
