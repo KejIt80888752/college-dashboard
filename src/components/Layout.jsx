@@ -116,30 +116,14 @@ export default function Layout() {
             </div>
           </div>
 
-          {/* RAISE Logo at bottom */}
-          <div style={{
-            padding: collapsed ? '8px 0' : '6px 10px 10px',
-            display: 'flex',
-            alignItems: 'center',
-            justifyContent: 'center',
-          }}>
-            {collapsed ? (
-              <div style={{ width: '30px', height: '30px', background: '#EEF0FF', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
-                <GraduationCap size={16} color="#3D3BF3" />
+          {/* Powered by tag */}
+          {!collapsed && (
+            <div style={{ padding: '4px 10px 10px', textAlign: 'center' }}>
+              <div style={{ fontSize: '8px', color: '#D1D5DB', fontWeight: '400' }}>
+                Powered by <span style={{ fontWeight: '700', color: '#C4C2FB' }}>KEJ IT</span>
               </div>
-            ) : (
-              <div style={{ textAlign: 'center' }}>
-                <img
-                  src="/raise-logo.png"
-                  alt="RAISE"
-                  style={{ height: '28px', width: 'auto', objectFit: 'contain', marginBottom: '3px', display: 'block', margin: '0 auto 3px' }}
-                />
-                <div style={{ fontSize: '8px', color: '#D1D5DB', fontWeight: '400' }}>
-                  Powered by <span style={{ fontWeight: '700', color: '#C4C2FB' }}>KEJ IT</span>
-                </div>
-              </div>
-            )}
-          </div>
+            </div>
+          )}
         </div>
       </div>
 
