@@ -41,15 +41,24 @@ export default function Layout() {
         overflow: 'hidden',
       }}>
 
-        {/* Collapse Toggle - Top */}
+        {/* Logo + Collapse Toggle - Top */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          justifyContent: collapsed ? 'center' : 'flex-end',
+          justifyContent: collapsed ? 'center' : 'space-between',
           padding: '10px 10px',
           borderBottom: '1px solid #F3F4F6',
-          minHeight: '44px',
+          minHeight: '56px',
         }}>
+          {!collapsed && (
+            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', overflow: 'hidden' }}>
+              <img src="/raise-logo.png" alt="RAISE" style={{ height: '32px', width: 'auto', objectFit: 'contain', flexShrink: 0 }} />
+              <span style={{ fontSize: '13px', fontWeight: '700', color: '#111827', whiteSpace: 'nowrap' }}>College CRM</span>
+            </div>
+          )}
+          {collapsed && (
+            <img src="/raise-logo.png" alt="RAISE" style={{ height: '28px', width: 'auto', objectFit: 'contain' }} />
+          )}
           <button onClick={() => setCollapsed(!collapsed)}
             style={{ background: '#F3F4F6', border: 'none', cursor: 'pointer', color: '#6B7280', display: 'flex', padding: '6px', borderRadius: '8px', flexShrink: 0 }}>
             {collapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
