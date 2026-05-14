@@ -132,7 +132,7 @@ export default function Layout() {
         {/* Top Header */}
         <header style={{ background: '#FFFFFF', borderBottom: '1px solid #E5E7EB', padding: '0 24px', height: '64px', display: 'flex', alignItems: 'center', gap: '12px', flexShrink: 0 }}>
           {/* RAISE Logo in header */}
-          <img src="/raise-logo.png" alt="RAISE" style={{ height: '40px', width: 'auto', objectFit: 'contain' }} />
+          <img src="/raise-logo.png" alt="RAISE" style={{ height: '28px', width: 'auto', objectFit: 'contain' }} />
           <div style={{ flex: 1 }} />
           <select style={{ padding: '7px 12px', borderRadius: '8px', border: '1px solid #E5E7EB', fontSize: '13px', color: '#374151', background: '#F9FAFB', outline: 'none', cursor: 'pointer' }}>
             <option>Academic Year 2026</option>
