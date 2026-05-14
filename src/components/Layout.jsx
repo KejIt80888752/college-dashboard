@@ -116,14 +116,30 @@ export default function Layout() {
             </div>
           </div>
 
-          {/* Powered by tag */}
-          {!collapsed && (
-            <div style={{ padding: '4px 10px 10px', textAlign: 'center' }}>
-              <div style={{ fontSize: '8px', color: '#D1D5DB', fontWeight: '400' }}>
-                Powered by <span style={{ fontWeight: '700', color: '#C4C2FB' }}>KEJ IT</span>
+          {/* RAISE Logo at bottom */}
+          <div style={{
+            padding: collapsed ? '8px 0' : '6px 10px 10px',
+            display: 'flex',
+            alignItems: 'center',
+            justifyContent: 'center',
+          }}>
+            {collapsed ? (
+              <div style={{ width: '30px', height: '30px', background: '#EEF0FF', borderRadius: '8px', display: 'flex', alignItems: 'center', justifyContent: 'center' }}>
+                <GraduationCap size={16} color="#3D3BF3" />
               </div>
-            </div>
-          )}
+            ) : (
+              <div style={{ textAlign: 'center' }}>
+                <img
+                  src="/raise-logo.png"
+                  alt="RAISE"
+                  style={{ height: '28px', width: 'auto', objectFit: 'contain', display: 'block', margin: '0 auto 3px' }}
+                />
+                <div style={{ fontSize: '8px', color: '#D1D5DB', fontWeight: '400' }}>
+                  Powered by <span style={{ fontWeight: '700', color: '#C4C2FB' }}>KEJ IT</span>
+                </div>
+              </div>
+            )}
+          </div>
         </div>
       </div>
 
@@ -131,8 +147,6 @@ export default function Layout() {
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
         {/* Top Header */}
         <header style={{ background: '#FFFFFF', borderBottom: '1px solid #E5E7EB', padding: '0 24px', height: '64px', display: 'flex', alignItems: 'center', gap: '12px', flexShrink: 0 }}>
-          {/* RAISE Logo in header */}
-          <img src="/raise-logo.png" alt="RAISE" style={{ height: '28px', width: 'auto', objectFit: 'contain' }} />
           <div style={{ flex: 1 }} />
           <select style={{ padding: '7px 12px', borderRadius: '8px', border: '1px solid #E5E7EB', fontSize: '13px', color: '#374151', background: '#F9FAFB', outline: 'none', cursor: 'pointer' }}>
             <option>Academic Year 2026</option>
