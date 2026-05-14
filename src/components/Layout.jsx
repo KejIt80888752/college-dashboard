@@ -41,24 +41,15 @@ export default function Layout() {
         overflow: 'hidden',
       }}>
 
-        {/* Logo + Collapse Toggle - Top */}
+        {/* Collapse Toggle - Top */}
         <div style={{
           display: 'flex',
           alignItems: 'center',
-          justifyContent: collapsed ? 'center' : 'space-between',
+          justifyContent: 'flex-end',
           padding: '10px 10px',
           borderBottom: '1px solid #F3F4F6',
-          minHeight: '56px',
+          minHeight: '44px',
         }}>
-          {!collapsed && (
-            <div style={{ display: 'flex', alignItems: 'center', gap: '8px', overflow: 'hidden' }}>
-              <img src="/raise-logo.png" alt="RAISE" style={{ height: '32px', width: 'auto', objectFit: 'contain', flexShrink: 0 }} />
-              <span style={{ fontSize: '13px', fontWeight: '700', color: '#111827', whiteSpace: 'nowrap' }}>College CRM</span>
-            </div>
-          )}
-          {collapsed && (
-            <img src="/raise-logo.png" alt="RAISE" style={{ height: '28px', width: 'auto', objectFit: 'contain' }} />
-          )}
           <button onClick={() => setCollapsed(!collapsed)}
             style={{ background: '#F3F4F6', border: 'none', cursor: 'pointer', color: '#6B7280', display: 'flex', padding: '6px', borderRadius: '8px', flexShrink: 0 }}>
             {collapsed ? <ChevronRight size={16} /> : <ChevronLeft size={16} />}
@@ -156,6 +147,8 @@ export default function Layout() {
       <div style={{ flex: 1, display: 'flex', flexDirection: 'column', overflow: 'hidden' }}>
         {/* Top Header */}
         <header style={{ background: '#FFFFFF', borderBottom: '1px solid #E5E7EB', padding: '0 24px', height: '64px', display: 'flex', alignItems: 'center', gap: '12px', flexShrink: 0 }}>
+          {/* RAISE Logo in header */}
+          <img src="/raise-logo.png" alt="RAISE" style={{ height: '40px', width: 'auto', objectFit: 'contain' }} />
           <div style={{ flex: 1 }} />
           <select style={{ padding: '7px 12px', borderRadius: '8px', border: '1px solid #E5E7EB', fontSize: '13px', color: '#374151', background: '#F9FAFB', outline: 'none', cursor: 'pointer' }}>
             <option>Academic Year 2026</option>
