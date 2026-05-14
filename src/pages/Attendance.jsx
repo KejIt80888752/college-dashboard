@@ -1,6 +1,7 @@
 import { useState } from 'react';
 import { Search, Users, CalendarCheck, TrendingUp, AlertTriangle, Loader, Calendar } from 'lucide-react';
 import api from '../api/axios';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 const deptColors = { CS: '#3D3BF3', IT: '#22C55E', ECE: '#F59E0B', MECH: '#EF4444', CIVIL: '#8B5CF6' };
 
@@ -55,7 +56,7 @@ export default function Attendance() {
   };
 
   return (
-    <div style={{ padding: '28px' }}>
+    <div style={{ padding: isMobile ? '16px' : '28px' }}>
 
       {/* Header */}
       <div style={{ marginBottom: '24px' }}>

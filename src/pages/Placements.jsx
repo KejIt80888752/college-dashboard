@@ -1,9 +1,11 @@
 import { useState, useEffect } from 'react';
 import { Briefcase, DollarSign, Users, TrendingUp, Plus, X, Loader, Calendar, Target, RefreshCw } from 'lucide-react';
 import api from '../api/axios';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 export default function Placements() {
   const [placements, setPlacements] = useState([]);
+  const isMobile = useIsMobile();
   const [loading, setLoading] = useState(true);
   const [showForm, setShowForm] = useState(false);
   const [saving, setSaving] = useState(false);
@@ -35,7 +37,7 @@ export default function Placements() {
   };
 
   return (
-    <div style={{ padding: '28px' }}>
+    <div style={{ padding: isMobile ? '16px' : '28px' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
         <div>
           <h1 style={{ fontSize: '22px', fontWeight: '800', color: '#111827', margin: 0 }}>Placements</h1>
@@ -54,7 +56,7 @@ export default function Placements() {
       </div>
 
       {/* Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', marginBottom: '24px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)', gap: '16px', marginBottom: '24px' }}>
         {[
           { label: 'Total Drives',   value: placements.length, color: '#3D3BF3', bg: '#EEF0FF', Icon: Briefcase },
           { label: 'Active Drives',  value: placements.length, color: '#22C55E', bg: '#F0FDF4', Icon: TrendingUp },
@@ -116,7 +118,7 @@ export default function Placements() {
       {/* Add Drive Modal */}
       {showForm && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50, padding: '16px' }}>
-          <div style={{ background: '#FFFFFF', borderRadius: '24px', width: '100%', maxWidth: '480px', padding: '28px', boxShadow: '0 20px 60px rgba(0,0,0,0.15)' }}>
+          <div style={{ background: '#FFFFFF', borderRadius: '24px', width: '100%', maxWidth: '480px', padding: isMobile ? '16px' : '28px', boxShadow: '0 20px 60px rgba(0,0,0,0.15)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
               <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#111827', margin: 0 }}>Add Placement Drive</h3>
               <button onClick={() => setShowForm(false)} style={{ width: '32px', height: '32px', borderRadius: '10px', background: '#F3F4F6', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><X size={16} /></button>

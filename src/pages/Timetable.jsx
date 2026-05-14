@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Clock, BookOpen, Plus, X, Loader, RefreshCw } from 'lucide-react';
 import api from '../api/axios';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 const COLORS = ['#3D3BF3','#22C55E','#F59E0B','#EF4444','#8B5CF6','#EC4899','#06B6D4','#10B981','#F97316','#8B5CF6'];
 const days = ['Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'];
@@ -15,6 +16,7 @@ function getColor(subject, map) {
 
 export default function Timetable() {
   const [schedule, setSchedule] = useState([]);
+  const isMobile = useIsMobile();
   const [loading, setLoading] = useState(true);
   const [selectedDept, setSelectedDept] = useState('CS');
   const [selectedSem, setSelectedSem] = useState('5');
@@ -67,7 +69,7 @@ export default function Timetable() {
   const subjects = [...new Set(schedule.map(e => e.subject).filter(Boolean))];
 
   return (
-    <div style={{ padding: '28px' }}>
+    <div style={{ padding: isMobile ? '16px' : '28px' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
         <div>
           <h1 style={{ fontSize: '22px', fontWeight: '800', color: '#111827', margin: 0 }}>Timetable</h1>
@@ -164,7 +166,7 @@ export default function Timetable() {
 
       {/* Subject Summary */}
       {subjects.length > 0 && (
-        <div style={{ marginTop: '20px', display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '12px' }}>
+        <div style={{ marginTop: '20px', display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)', gap: '12px' }}>
           {subjects.map(subject => {
             const color = getColor(subject, colorMap);
             const count = schedule.filter(e => e.subject === subject).length;
@@ -186,7 +188,7 @@ export default function Timetable() {
       {/* Add Entry Modal */}
       {showForm && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50, padding: '16px' }}>
-          <div style={{ background: '#FFFFFF', borderRadius: '24px', width: '100%', maxWidth: '480px', padding: '28px', boxShadow: '0 20px 60px rgba(0,0,0,0.15)', maxHeight: '90vh', overflowY: 'auto' }}>
+          <div style={{ background: '#FFFFFF', borderRadius: '24px', width: '100%', maxWidth: '480px', padding: isMobile ? '16px' : '28px', boxShadow: '0 20px 60px rgba(0,0,0,0.15)', maxHeight: '90vh', overflowY: 'auto' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
               <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#111827', margin: 0 }}>Add Timetable Entry</h3>
               <button onClick={() => setShowForm(false)} style={{ width: '32px', height: '32px', borderRadius: '10px', background: '#F3F4F6', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><X size={16} /></button>

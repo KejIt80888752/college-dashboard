@@ -1,11 +1,13 @@
 import { useState, useEffect } from 'react';
 import { BookOpen, Calendar, CheckCircle, Clock, FileText, Plus, X, Loader, Timer, PenLine, RefreshCw } from 'lucide-react';
 import api from '../api/axios';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 const deptColors = { CS: '#3D3BF3', IT: '#22C55E', ECE: '#F59E0B', MECH: '#EF4444', CIVIL: '#8B5CF6' };
 
 export default function Exams() {
   const [exams, setExams] = useState([]);
+  const isMobile = useIsMobile();
   const [loading, setLoading] = useState(true);
   const [filter, setFilter] = useState('all');
   const [showForm, setShowForm] = useState(false);
@@ -58,7 +60,7 @@ export default function Exams() {
   };
 
   return (
-    <div style={{ padding: '28px' }}>
+    <div style={{ padding: isMobile ? '16px' : '28px' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
         <div>
           <h1 style={{ fontSize: '22px', fontWeight: '800', color: '#111827', margin: 0 }}>Exams & Marks</h1>
@@ -77,7 +79,7 @@ export default function Exams() {
       </div>
 
       {/* Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', marginBottom: '24px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)', gap: '16px', marginBottom: '24px' }}>
         {[
           { label: 'Total Exams',  value: exams.length,  color: '#3D3BF3', bg: '#EEF0FF', Icon: BookOpen },
           { label: 'Upcoming',     value: upcoming,       color: '#F59E0B', bg: '#FFFBEB', Icon: Clock },
@@ -151,7 +153,7 @@ export default function Exams() {
       {/* Add Exam Modal */}
       {showForm && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50, padding: '16px' }}>
-          <div style={{ background: '#FFFFFF', borderRadius: '24px', width: '100%', maxWidth: '480px', padding: '28px', boxShadow: '0 20px 60px rgba(0,0,0,0.15)', maxHeight: '90vh', overflowY: 'auto' }}>
+          <div style={{ background: '#FFFFFF', borderRadius: '24px', width: '100%', maxWidth: '480px', padding: isMobile ? '16px' : '28px', boxShadow: '0 20px 60px rgba(0,0,0,0.15)', maxHeight: '90vh', overflowY: 'auto' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
               <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#111827', margin: 0 }}>Schedule Exam</h3>
               <button onClick={() => setShowForm(false)} style={{ width: '32px', height: '32px', borderRadius: '10px', background: '#F3F4F6', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><X size={16} /></button>

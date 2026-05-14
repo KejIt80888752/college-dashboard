@@ -5,6 +5,7 @@ import {
   Briefcase, FileText, Megaphone, Zap, Smartphone, History
 } from 'lucide-react';
 import api from '../api/axios';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 const STORAGE_KEY = 'raise_notifications';
 
@@ -97,7 +98,7 @@ export default function Notifications() {
       </div>
 
       {/* Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '14px', marginBottom: '20px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)', gap: '14px', marginBottom: '20px' }}>
         {[
           { label: 'Total Sent',   value: history.length,                                                    color: '#3D3BF3', bg: '#EEF0FF', Icon: Bell },
           { label: 'Broadcast',    value: history.filter(n => n.target === 'All Students').length,           color: '#22C55E', bg: '#F0FDF4', Icon: CheckCircle },

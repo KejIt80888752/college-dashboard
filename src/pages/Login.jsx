@@ -157,14 +157,16 @@ export default function Login() {
 
   const formatTimer = (s) => `${Math.floor(s / 60).toString().padStart(2, '0')}:${(s % 60).toString().padStart(2, '0')}`;
 
-  return (
-    <div style={{ minHeight: '100vh', display: 'flex', background: '#F5F5FF' }}>
+  const isMobile = window.innerWidth < 768;
 
-      {/* LEFT — Brand Panel */}
+  return (
+    <div style={{ minHeight: '100vh', display: 'flex', flexDirection: isMobile ? 'column' : 'row', background: '#F5F5FF' }}>
+
+      {/* LEFT — Brand Panel (hidden on mobile) */}
       <div style={{
-        width: '50%',
+        width: isMobile ? '100%' : '50%',
+        display: isMobile ? 'none' : 'flex',
         background: 'linear-gradient(145deg, #3D3BF3 0%, #2320b8 100%)',
-        display: 'flex',
         flexDirection: 'column',
         alignItems: 'center',
         justifyContent: 'center',
@@ -202,14 +204,21 @@ export default function Login() {
       </div>
 
       {/* RIGHT — Form Panel */}
-      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: '40px' }}>
+      <div style={{ flex: 1, display: 'flex', alignItems: 'center', justifyContent: 'center', padding: isMobile ? '24px 16px' : '40px' }}>
+        {isMobile && (
+          <div style={{ position: 'fixed', top: 0, left: 0, right: 0, height: '120px', background: 'linear-gradient(145deg, #3D3BF3 0%, #2320b8 100%)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 0 }}>
+            <img src="/raise-logo.png" alt="RAISE" style={{ height: '36px', filter: 'brightness(0) invert(1)' }} />
+          </div>
+        )}
         <div style={{
           width: '100%',
           maxWidth: '420px',
           background: '#FFFFFF',
-          borderRadius: '28px',
-          padding: '40px',
+          borderRadius: isMobile ? '24px' : '28px',
+          padding: isMobile ? '28px 20px' : '40px',
           boxShadow: '0 8px 40px rgba(61,59,243,0.12), 0 2px 8px rgba(0,0,0,0.06)',
+          marginTop: isMobile ? '80px' : '0',
+          position: 'relative', zIndex: 1,
         }}>
           {/* Back button */}
           {mode !== 'login' && (

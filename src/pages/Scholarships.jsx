@@ -1,6 +1,7 @@
 import { useState, useEffect } from 'react';
 import { Award, CheckCircle, XCircle, Clock, DollarSign, Loader, Plus, X, RefreshCw } from 'lucide-react';
 import api from '../api/axios';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 const statusConfig = {
   pending:  { color: '#D97706', bg: '#FFFBEB', label: 'Pending',  icon: Clock },
@@ -14,6 +15,7 @@ const statusConfig = {
 export default function Scholarships() {
   const [schemes, setSchemes] = useState([]);
   const [applications, setApplications] = useState([]);
+  const isMobile = useIsMobile();
   const [loading, setLoading] = useState(true);
   const [tab, setTab] = useState('schemes');
   const [showForm, setShowForm] = useState(false);
@@ -59,7 +61,7 @@ export default function Scholarships() {
   const totalAmount = schemes.reduce((s, sc) => s + (sc.amount || 0), 0);
 
   return (
-    <div style={{ padding: '28px' }}>
+    <div style={{ padding: isMobile ? '16px' : '28px' }}>
       <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
         <div>
           <h1 style={{ fontSize: '22px', fontWeight: '800', color: '#111827', margin: 0 }}>Scholarships</h1>
@@ -80,7 +82,7 @@ export default function Scholarships() {
       </div>
 
       {/* Stats */}
-      <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '16px', marginBottom: '24px' }}>
+      <div style={{ display: 'grid', gridTemplateColumns: isMobile ? 'repeat(2, 1fr)' : 'repeat(4, 1fr)', gap: '16px', marginBottom: '24px' }}>
         {[
           { label: 'Total Schemes', value: schemes.length, color: '#3D3BF3', bg: '#EEF0FF', Icon: Award },
           { label: 'Active Schemes', value: schemes.length, color: '#22C55E', bg: '#F0FDF4', Icon: CheckCircle },
@@ -202,7 +204,7 @@ export default function Scholarships() {
       {/* Add Scheme Modal */}
       {showForm && (
         <div style={{ position: 'fixed', inset: 0, background: 'rgba(0,0,0,0.5)', backdropFilter: 'blur(4px)', display: 'flex', alignItems: 'center', justifyContent: 'center', zIndex: 50, padding: '16px' }}>
-          <div style={{ background: '#FFFFFF', borderRadius: '24px', width: '100%', maxWidth: '440px', padding: '28px', boxShadow: '0 20px 60px rgba(0,0,0,0.15)' }}>
+          <div style={{ background: '#FFFFFF', borderRadius: '24px', width: '100%', maxWidth: '440px', padding: isMobile ? '16px' : '28px', boxShadow: '0 20px 60px rgba(0,0,0,0.15)' }}>
             <div style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', marginBottom: '24px' }}>
               <h3 style={{ fontSize: '18px', fontWeight: '800', color: '#111827', margin: 0 }}>Add Scholarship Scheme</h3>
               <button onClick={() => setShowForm(false)} style={{ width: '32px', height: '32px', borderRadius: '10px', background: '#F3F4F6', border: 'none', cursor: 'pointer', display: 'flex', alignItems: 'center', justifyContent: 'center' }}><X size={16} /></button>
