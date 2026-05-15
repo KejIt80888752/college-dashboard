@@ -48,6 +48,7 @@ function saveHistory(data) {
 }
 
 export default function Notifications() {
+  const isMobile = useIsMobile();
   const [history, setHistory] = useState(loadHistory);
   const [title, setTitle]   = useState('');
   const [message, setMessage] = useState('');
