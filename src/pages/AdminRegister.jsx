@@ -32,10 +32,12 @@ export default function AdminRegister() {
   const navigate = useNavigate();
   const [searchParams] = useSearchParams();
 
+  const keyFromUrl = searchParams.get('key') || '';
+
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const [confirmPassword, setConfirmPassword] = useState('');
-  const [adminKey, setAdminKey] = useState(searchParams.get('key') || '');
+  const [adminKey, setAdminKey] = useState(keyFromUrl);
   const [showPass, setShowPass] = useState(false);
   const [showConfirmPass, setShowConfirmPass] = useState(false);
   const [showKey, setShowKey] = useState(false);
@@ -89,7 +91,7 @@ export default function AdminRegister() {
             Create Admin Account
           </h2>
           <p style={{ fontSize: '13px', color: '#6B7280', marginBottom: '24px' }}>
-            Authorized personnel only — Admin key required
+            {keyFromUrl ? 'Enter your email and set a password' : 'Authorized personnel only — Admin key required'}
           </p>
         </div>
 
@@ -106,23 +108,25 @@ export default function AdminRegister() {
         )}
 
         <form onSubmit={handleRegister}>
-          {/* Admin Key */}
-          <div style={{ marginBottom: '16px' }}>
-            <label style={labelStyle}>Admin Key</label>
-            <div style={{ position: 'relative' }}>
-              <input type={showKey ? 'text' : 'password'} required
-                value={adminKey} onChange={e => setAdminKey(e.target.value)}
-                placeholder="Enter admin secret key"
-                style={{ ...inputStyle, paddingLeft: '44px', paddingRight: '48px' }}
-                onFocus={e => e.target.style.borderColor = '#3D3BF3'}
-                onBlur={e => e.target.style.borderColor = '#E5E7EB'} />
-              <KeyRound size={16} color="#9CA3AF" style={{ position: 'absolute', left: '15px', top: '50%', transform: 'translateY(-50%)' }} />
-              <button type="button" onClick={() => setShowKey(!showKey)}
-                style={{ position: 'absolute', right: '14px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#9CA3AF', display: 'flex' }}>
-                {showKey ? <EyeOff size={18} /> : <Eye size={18} />}
-              </button>
+          {/* Admin Key — hidden if key came from URL */}
+          {!keyFromUrl && (
+            <div style={{ marginBottom: '16px' }}>
+              <label style={labelStyle}>Admin Key</label>
+              <div style={{ position: 'relative' }}>
+                <input type={showKey ? 'text' : 'password'} required
+                  value={adminKey} onChange={e => setAdminKey(e.target.value)}
+                  placeholder="Enter admin secret key"
+                  style={{ ...inputStyle, paddingLeft: '44px', paddingRight: '48px' }}
+                  onFocus={e => e.target.style.borderColor = '#3D3BF3'}
+                  onBlur={e => e.target.style.borderColor = '#E5E7EB'} />
+                <KeyRound size={16} color="#9CA3AF" style={{ position: 'absolute', left: '15px', top: '50%', transform: 'translateY(-50%)' }} />
+                <button type="button" onClick={() => setShowKey(!showKey)}
+                  style={{ position: 'absolute', right: '14px', top: '50%', transform: 'translateY(-50%)', background: 'none', border: 'none', cursor: 'pointer', color: '#9CA3AF', display: 'flex' }}>
+                  {showKey ? <EyeOff size={18} /> : <Eye size={18} />}
+                </button>
+              </div>
             </div>
-          </div>
+          )}
 
           {/* Email */}
           <div style={{ marginBottom: '16px' }}>
