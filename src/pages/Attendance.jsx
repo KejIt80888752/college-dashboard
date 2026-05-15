@@ -6,6 +6,7 @@ import { useIsMobile } from '../hooks/useIsMobile';
 const deptColors = { CS: '#3D3BF3', IT: '#22C55E', ECE: '#F59E0B', MECH: '#EF4444', CIVIL: '#8B5CF6' };
 
 export default function Attendance() {
+  const isMobile = useIsMobile();
   const [query,             setQuery]             = useState('');
   const [students,          setStudents]          = useState([]);
   const [searching,         setSearching]         = useState(false);

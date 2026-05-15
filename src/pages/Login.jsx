@@ -3,6 +3,7 @@ import { useNavigate } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Eye, EyeOff, Loader, Mail, Lock, ArrowLeft, RefreshCw } from 'lucide-react';
 import api from '../api/axios';
+import { useIsMobile } from '../hooks/useIsMobile';
 
 const inputStyle = {
   width: '100%',
@@ -30,6 +31,7 @@ const labelStyle = {
 const OTP_EXPIRY = 120; // seconds
 
 export default function Login() {
+  const isMobile = useIsMobile();
   const { login } = useAuth();
   const navigate = useNavigate();
   const [mode, setMode] = useState('login'); // login | register | otp | setpass
@@ -156,8 +158,6 @@ export default function Login() {
   };
 
   const formatTimer = (s) => `${Math.floor(s / 60).toString().padStart(2, '0')}:${(s % 60).toString().padStart(2, '0')}`;
-
-  const isMobile = window.innerWidth < 768;
 
   return (
     <div style={{ minHeight: '100vh', display: 'flex', flexDirection: isMobile ? 'column' : 'row', background: '#F5F5FF' }}>
