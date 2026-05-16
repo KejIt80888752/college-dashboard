@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useSearchParams } from 'react-router-dom';
 import { useAuth } from '../context/AuthContext';
 import { Eye, EyeOff, Loader, Mail, Lock, KeyRound, ShieldCheck } from 'lucide-react';
 import { useIsMobile } from '../hooks/useIsMobile';
@@ -33,9 +33,11 @@ export default function Login() {
   const isMobile = useIsMobile();
   const { login } = useAuth();
   const navigate = useNavigate();
+  const [searchParams] = useSearchParams();
 
-  // Step 1: access key | Step 2: login
-  const [step, setStep] = useState('key');
+  // If key is in URL, skip key step directly
+  const keyFromUrl = searchParams.get('key');
+  const [step, setStep] = useState(keyFromUrl === ADMIN_ACCESS_KEY ? 'login' : 'key');
   const [accessKey, setAccessKey] = useState('');
   const [showKey, setShowKey] = useState(false);
   const [keyError, setKeyError] = useState('');
